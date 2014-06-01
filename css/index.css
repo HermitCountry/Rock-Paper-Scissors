@@ -1,0 +1,98 @@
+@font-face {
+  font-family: 'Arcade';
+  src: url('../fonts/ARCADECLASSIC.TTF') format('truetype');
+}
+
+body {
+	color: white;
+}
+
+p {
+	padding: 0;
+	margin: 5px;
+	font-family: 'Arcade', Georgia;
+	font-size: 2em;
+}
+
+#game_canvas {
+	border: 1px solid black;
+	width: 70%;
+	height: 480px;
+	min-width: 512px;
+	margin: auto;
+
+	background-image: url("../img/bg1.gif");
+	background-size: 100%;
+}
+
+hgroup {
+	color: black;
+}
+
+button {
+	font-family: 'Arcade', Georgia;
+	font-size: 2em;
+}
+
+.menu {
+	border: 6px solid white;
+	border-radius: 10px;
+	background: -webkit-linear-gradient(#2D1BF5, #000);
+	margin: 10px;
+}
+
+#top {
+	height: 40px;
+}
+
+#avatar {
+	height: 260px;
+}
+
+.avatar {
+	display: block;
+	margin: auto;
+	height: 160px;
+	padding-top: 40px;
+}
+
+#main {
+  	height: 120px;
+}
+
+#main button {
+	display: block;
+}
+
+#stats {
+	float: left;
+	width: 33%;
+}
+
+#announcements {
+	float: left;
+	text-align: center;
+	width: 33%;
+}
+
+#actions {
+	float: right;
+}
+
+#popup {
+	background: -webkit-linear-gradient(#2D1BF5, #000);
+	position: absolute;
+	visibility: visible;
+	width: 340px;
+	height: 130px;
+	left: 50%;
+	top: 50%;
+	border: 6px white solid;
+	border-radius: 20px;
+	margin: -130px 0 0 -190px;
+}
+
+#popup button {
+	display: block;
+	margin: auto;
+}

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <title>Rock Paper Scissors</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="//favicon.ico" type="image/x-icon" sizes="16x16">
+        <link rel="stylesheet" href="css/index.css">
+
+    </head>
+    <body>
+        <header role="banner">
+            <hgroup>
+                <h1><a href="#">Rock Paper Scissors</a></h1>
+                <h2>The Video Game Version of the Classic Game of Skill</h2>
+            </hgroup>
+        </header>
+<div id="game_canvas">
+    <div class="menu" id="top"><p id="dialogue">TEST</p></div>
+    <div id="avatar">
+        <img class="avatar" src="./img/pat.gif">
+    </div>
+    <div class="menu" id="main">
+        <div id="stats">
+            <p>Your Score: 0</p>
+            <p>Pat's Score: 0</p>
+        </div>
+        <div id="announcements">
+            <p><span id="opponent_name">PAT CORNWALL</span><br>VS<br>MATT WINCHELL</p>
+        </div>
+        <div id="actions">
+            <button class="action" id="rock">ROCK</button>
+            <button class="action" id="paper">PAPER</button>
+            <button class="action" id="scissors">SCISSORS</button>
+        </div>
+    </div>
+</div>
+<aside id="popup">
+    <p id="popup_text">TEST</p>
+    <button>Close</button>
+</aside>
+
+        <footer>&copy; 2014 Hermit Country. All Rights Reserved.</footer>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.0.js"><\/script>')</script>
+        <script src="js/main.js"></script>
+    </body>
+</html>
