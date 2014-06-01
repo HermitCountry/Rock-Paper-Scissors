@@ -21,7 +21,7 @@ p {
 	min-width: 512px;
 	margin: auto;
 
-	background-image: url("../img/bg1.gif");
+ 	background-image: url(../img/bg1.gif); 
 	background-size: 100%;
 }
 
