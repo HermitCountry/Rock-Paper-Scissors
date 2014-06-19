@@ -1,48 +1,74 @@
 (function (window, document, undefined) {
 
-//Global Game Variables
-var yourScore = 0;
-var theirScore = 0;
-	
 //Start a New Round!
 function newRound() {
 		yourScore = 0;
 		theirScore = 0;
+		getBackground();
+		getOpponent();
 	};
-	
-//The Strategies
-function getComputerChoice(strategy) {
-	switch (strategy) {
-		case "random":
-				computerChoice = Math.random();
-				if (computerChoice < 0.34) {
-					computerChoice = "rock";
-				} else if (computerChoice <= 0.67) {
-					computerChoice = "paper";
-				} else {
-					computerChoice = "scissors";
-				};
-			break;
-		
-		case "rock":
-			computerChoice = "rock";
-			break;
 
-		case "hack":
-			if (userChoice === "rock") {
-				computerChoice = "paper";
-			} else if (userChoice === "paper") {
-				computerChoice = "scissors";
-			} else {
-				computerChoice = "rock";
-			};
-			break;
+	//The NPC Characters
+	function Character (name, taunt, img, strategy) {
+	    this.name = name;
+	    this.taunt = taunt;
+	    this.img = img;
+	    this.strategy = strategy;
+	    this.speak = function(dialogue) {
+	    	$("#dialogue").text(dialogue);
+	    };
+	    this.sayTaunt = function(){
+			var i = Math.floor(Math.random() * this.taunt.length);
+			taunt = this.taunt[i];
+			this.speak(taunt);    	
+	    };
+	    this.getChoice =  function() {
+	    	switch (this.strategy) {
+	    		case "random":
+	    				var computerChoice = Math.random();
+	    				if (computerChoice < 0.34) {
+	    					return "rock";
+	    				} else if (computerChoice <= 0.67) {
+	    					return "paper";
+	    				} else {
+	    					return "scissors";
+	    				};
+	    			break;
+	    		
+	    		case "rock":
+	    			return "rock";
+	    			break;
 
-		default:
-		break;
-		}
-};
-	
+	    		case "hack":
+	    			if (userChoice === "rock") {
+	    				return "paper";
+	    			} else if (userChoice === "paper") {
+	    				return "scissors";
+	    			} else {
+	    				return "rock";
+	    			};
+	    			break;
+
+	    		default:
+	    		break;
+	    		};
+	    };
+	};
+
+	var matt = new Character("Matt Winchell", ["I'll eat you for breakfast!","You don't stand a chance!", "Give up while you still can!"], "./img/matt.gif", "random");
+	var pat = new Character("Pat Cornwall", ["I'm not hacking!"], "./img/pat.gif", "random");
+	var ray = new Character("Ray Marcilla", ["Bow before my unstoppable force!", "Rock never fails!"], "./img/kuhlman.gif", "rock");
+	var john = new Character("John McKay", ["You haven't seen anything yet!", "I will never be defeated!"], "./img/mckay.gif", "hack");
+	var heath = new Character("Heath Gifford", ["Who's your daddy?", "You got a problem with me?", "Dont come in here with your big dick swagger!"], "./img/heath.gif", "random");
+
+	var thePit = [matt, pat, ray, john, heath];
+
+	function getOpponent() {
+		var i = Math.floor(Math.random() * thePit.length);
+		opponent = thePit[i];
+		$("img").attr("src",opponent.img);
+		$("#opponent_name").text(opponent.name);
+	};
 
 //Get Game Outcome
 function compare(choice1, choice2) {
@@ -80,5 +106,62 @@ function compare(choice1, choice2) {
         }
     }
 };
+
+//The Backgrounds
+var background = ["./img/bg1.gif","./img/bg2.png","./img/bg3.png","./img/bg4.png"];
+
+function getBackground() {
+	var i = Math.floor(Math.random() * background.length);
+	$("#game_canvas").css("background-image","url(" + background[i] + ")");
+};
+
+//Set Score
+function setScore() {
+	$("#yourScore").text("Your score: " + yourScore);
+	$("#theirScore").text(opponent.name + "'s Score: " + theirScore);
+};
+
+function resetScore() {
+	yourScore = 0;
+	theirScore = 0;
+	setScore();
+};
+
+// The jQuery Part
+
+function closePopup() {
+	if ($("#popup").is(":visible")) {
+		$("#popup").hide();
+	}
+};
+
+$("#close").click( function() {
+	closePopup();
+	if (yourScore >= 5) {
+		$("#popup").show();
+		$("#popup_text").text("You have defeated " + opponent.name + "!");
+			resetScore();
+			newRound();
+	} else if (theirScore >= 5) {
+		$("#popup").show();
+		$("#popup_text").text("You have been defeated by the mighty " + opponent.name + "!");
+			resetScore();
+			newRound();
+	};
+});
+
+$(".action").click( function() {
+	userChoice = event.target.id;
+	computerChoice = opponent.getChoice();
+	opponent.getChoice();
+	opponent.speak("I choose " + computerChoice + ".");
+	compare(userChoice,computerChoice);
+	setScore();
+	opponent.sayTaunt();
+	$("#popup").show();
+	$("#popup_text").text(outcome);
+});
+
+newRound();
 
 })(window, document);

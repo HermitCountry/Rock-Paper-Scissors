@@ -1,3 +1,74 @@
+//The Modules to make
+// Character Module
+// Character Creator Module that pulls from an initializaiton file
+//The module should include their methods like Taunt and Strategies etc
+
+var characterModule = (function(){
+	// Private Code
+	character = function(name, taunt, img, strategy) {
+		this.name = name;
+		this.taunt = taunt;
+		this.img = img;
+		this.strategy = strategy;
+	};
+	
+	var matt = new Character("Matt Winchell", ["I'll eat you for breakfast!","You don't stand a chance!", "Give up while you still can!"], "./img/matt.gif", "random");
+	
+	return {
+    getName: function(character){
+			return character.name;
+		}
+	};
+})();
+
+	
+	
+	
+	// Private Code
+	character: function(name, taunt, img, strategy) {
+		this.name = name;
+		this.taunt = taunt;
+		this.img = img;
+		this.strategy = strategy;
+
+		function getComputerChoicePrivate() {
+			switch (opponent.strategy) {
+			case "random":
+				computerChoice = Math.random();
+					if (computerChoice < 0.34) {
+						computerChoice = "rock";
+					} else if (computerChoice <= 0.67) {
+						computerChoice = "paper";
+					} else {
+						computerChoice = "scissors";
+					}
+					break;
+
+			case "rock":
+				computerChoice = "rock";
+				break;
+
+			case "hack":
+				if (userChoice === "rock") {
+					computerChoice = "paper";
+				} else if (userChoice === "paper") {
+					computerChoice = "scissors";
+				} else {
+					computerChoice = "rock";
+				}
+				break;
+
+			default:
+			break;
+			}
+		};
+	},	
+	// Public return values
+  return : {
+		getComputerChoice: getComputerChoicePrivate,
+	};
+};
+
 //The NPC Characters
 function Character (name, taunt, img, strategy) {
     this.name = name;
@@ -132,6 +203,7 @@ var compare = function (choice1, choice2) {
         }
     }
 };
+
 var closePopup = function() {
 	if ($("#popup").is(":visible")) {
 		$("#popup").hide();
